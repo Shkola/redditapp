@@ -35,8 +35,8 @@ class TopFragment : Fragment(R.layout.fragment_main) {
             )
         }
 
-        observe(viewModel.actionImageSaved) {
-            Toast.makeText(activity, getString(R.string.image_saved), Toast.LENGTH_SHORT).show()
+        observe(viewModel.actionMessage) { message ->
+            Toast.makeText(activity, message, Toast.LENGTH_SHORT).show()
         }
 
         observe(viewModel.actionOpenImage) { imageUrl ->
@@ -47,7 +47,7 @@ class TopFragment : Fragment(R.layout.fragment_main) {
             if (intent.resolveActivity(requireContext().packageManager) != null) {
                 startActivity(intent)
             } else {
-                Toast.makeText(activity, getString(R.string.image_saved), Toast.LENGTH_SHORT).show()
+                Toast.makeText(activity, getString(R.string.unable_open), Toast.LENGTH_SHORT).show()
             }
         }
     }

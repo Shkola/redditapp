@@ -4,6 +4,8 @@
     <string name="main_fragment_label">Main Fragment</string>
     <string name="save_image">save image</string>
     <string name="image_saved">image saved to galery</string>
+    <string name="file_not_saved">file not saved</string>
+    <string name="unable_open">unable open file</string>
     <plurals name="descriptionPlaceholder">
         <item quantity="one">%s posted %d hour ago</item>
         <item quantity="other">%s posted %d hours ago</item>
