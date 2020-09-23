@@ -14,9 +14,7 @@ class TopFragment : Fragment(R.layout.fragment_main) {
 
     private val viewModel: TopViewModel by viewModels()
 
-    private val adapter by lazy {
-        TopAdapter()
-    }
+    private val adapter by lazy { TopAdapter() }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
@@ -31,6 +29,5 @@ class TopFragment : Fragment(R.layout.fragment_main) {
                 pagingData = data
             )
         }
-
     }
 }
