@@ -53,13 +53,15 @@ class TopViewModel @ViewModelInject constructor(
         .asLiveData(coroutineScope.coroutineContext)
 
     private fun onSaveImageToGallery(imageUrl: String) {
+        // провтик пермішени чекнути WRITE_EXTERNAL_STORAGE.
+        // Тестував на 10 андроїді і все працює. Буде час вечері підправлю якщо потрібно для більш старих версій
         coroutineScope.launch {
             val uri = Uri.parse(imageUrl)
 
             val bitmap = withContext(Dispatchers.IO) {
                 Picasso.get()
-                    .load(uri)
-                    .get()
+                        .load(uri)
+                        .get()
             }
 
             val fileExt = MimeTypeMap.getFileExtensionFromUrl(imageUrl)
