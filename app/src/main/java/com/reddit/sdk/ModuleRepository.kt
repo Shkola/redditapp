@@ -9,7 +9,7 @@ import javax.inject.Inject
 
 private const val PAGE_SIZE = 10
 
-internal class ModuleRepository @Inject constructor(
+class ModuleRepository @Inject constructor(
     private val remoteStorage: RemoteStorage
 ) : ModuleApi {
     override fun getTop(): Flow<PagingData<RedditNews>> {

@@ -58,6 +58,9 @@ dependencies {
     //paging
     implementation "androidx.paging:paging-runtime:$pagingVersion"
 
+    //picasso
+    implementation 'com.squareup.picasso:picasso:2.71828'
+
     debugImplementation "com.readystatesoftware.chuck:library:$chuckVersion"
     releaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuckVersion"
 

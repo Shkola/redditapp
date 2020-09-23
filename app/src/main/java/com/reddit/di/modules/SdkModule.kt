@@ -12,7 +12,7 @@ import dagger.hilt.android.components.ApplicationComponent
 
 @Module
 @InstallIn(ApplicationComponent::class)
-internal abstract class SdkModule {
+abstract class SdkModule {
 
     @Binds
     abstract fun bindRemoteStorage(remoteStorage: RemoteStorageImpl): RemoteStorage

@@ -3,7 +3,7 @@ package com.reddit.sdk.remote
 import com.reddit.sdk.RedditListing
 import com.reddit.sdk.RedditNews
 
-internal fun RedditListingResponse.toRedditListing() = RedditListing(
+fun RedditListingResponse.toRedditListing() = RedditListing(
     news = data.children.toRedditNews(),
     before = data.before,
     after = data.after
@@ -15,7 +15,7 @@ private fun RedditNewsResponse.toRedditNews(): RedditNews =
     RedditNews(
         author = author,
         title = title,
-        created = created,
+        created = created * 1000,
         thumbnail = thumbnail,
         url = url,
         commentsNumber = commentsNumber

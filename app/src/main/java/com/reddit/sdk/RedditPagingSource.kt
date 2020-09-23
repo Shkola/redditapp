@@ -6,7 +6,7 @@ import retrofit2.HttpException
 import java.io.IOException
 
 
-internal class RedditPagingSource(
+class RedditPagingSource(
     private val remoteStorage: RemoteStorage
 ) : PagingSource<String, RedditNews>() {
     override suspend fun load(params: LoadParams<String>): LoadResult<String, RedditNews> {

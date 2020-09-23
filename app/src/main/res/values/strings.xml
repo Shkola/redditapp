@@ -2,4 +2,13 @@
     <string name="app_name">Reddit</string>
     <!-- Strings used for fragments for navigation -->
     <string name="main_fragment_label">Main Fragment</string>
+    <string name="save_image">save image</string>
+    <plurals name="descriptionPlaceholder">
+        <item quantity="one">%s posted %d hour ago</item>
+        <item quantity="other">%s posted %d hours ago</item>
+    </plurals>
+    <plurals name="commentsPlaceholder">
+        <item quantity="one">%d comment</item>
+        <item quantity="other">%d comments</item>
+    </plurals>
 </resources>

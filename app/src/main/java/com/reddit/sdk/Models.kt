@@ -1,12 +1,14 @@
 package com.reddit.sdk
 
-internal data class RedditListing(
+import java.util.*
+
+data class RedditListing(
     val news: List<RedditNews>,
     val after: String?,
     val before: String?
 )
 
-internal data class RedditNews(
+data class RedditNews(
     val author: String,
     val title: String,
     val created: Long,
@@ -14,3 +16,6 @@ internal data class RedditNews(
     val thumbnail: String,
     val url: String
 )
+
+val RedditNews.timeDelta
+    get() = Calendar.getInstance().timeInMillis - created
