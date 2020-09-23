@@ -93,10 +93,10 @@ class TopFragment : Fragment(R.layout.fragment_main) {
     }
 
     private fun checkSavePermission(success: () -> Unit, denied: () -> Unit) {
-        when {
-            ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED -> success()
-            shouldShowRequestPermissionRationale(Manifest.permission.WRITE_EXTERNAL_STORAGE) -> denied()
-            else -> RequestPermissionLauncher(success, denied)?.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
+        if (ContextCompat.checkSelfPermission(requireContext(), Manifest.permission.WRITE_EXTERNAL_STORAGE) == PackageManager.PERMISSION_GRANTED) {
+            success()
+        } else {
+            RequestPermissionLauncher(success, denied)?.launch(Manifest.permission.WRITE_EXTERNAL_STORAGE)
         }
     }
 
