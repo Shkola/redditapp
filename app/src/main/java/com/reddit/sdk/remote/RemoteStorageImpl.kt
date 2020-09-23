@@ -6,7 +6,6 @@ import javax.inject.Inject
 internal class RemoteStorageImpl @Inject constructor(
         private val redditApi: RedditApi
 ) : RemoteStorage {
-    override fun getTop(after: String, limit: String): RedditListing {
-        TODO("Not yet implemented")
-    }
+    override suspend fun getTop(after: String?, limit: Int): RedditListing =
+        redditApi.getTop(after, limit).toRedditListing()
 }

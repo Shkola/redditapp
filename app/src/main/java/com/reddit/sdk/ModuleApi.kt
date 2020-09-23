@@ -1,5 +1,8 @@
 package com.reddit.sdk
 
+import androidx.paging.PagingData
+import kotlinx.coroutines.flow.Flow
+
 internal interface ModuleApi {
-    suspend fun getTop( after: String, limit: String): RedditListing
+    fun getTop(): Flow<PagingData<RedditNews>>
 }

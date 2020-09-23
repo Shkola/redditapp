@@ -45,13 +45,19 @@ dependencies {
     implementation 'androidx.navigation:navigation-fragment-ktx:2.3.0'
     implementation 'androidx.navigation:navigation-ui-ktx:2.3.0'
 
-
+    //hilt
     implementation "com.google.dagger:hilt-android:$daggerHiltVersion"
     kapt "com.google.dagger:hilt-android-compiler:$daggerHiltVersion"
     implementation "androidx.hilt:hilt-lifecycle-viewmodel:$hiltLifecycleVersion"
     kapt "androidx.hilt:hilt-compiler:$hiltLifecycleVersion"
+
+    //retrofit
     implementation "com.squareup.retrofit2:retrofit:$retrofitVersion"
     implementation "com.squareup.retrofit2:converter-gson:$retrofitVersion"
+
+    //paging
+    implementation "androidx.paging:paging-runtime:$pagingVersion"
+
     debugImplementation "com.readystatesoftware.chuck:library:$chuckVersion"
     releaseImplementation "com.readystatesoftware.chuck:library-no-op:$chuckVersion"
 
