@@ -1,6 +1,7 @@
 package com.reddit.sdk.remote
 
 import com.google.gson.annotations.SerializedName
+import com.reddit.sdk.ImageUrl
 
 
 class RedditListingResponse(
@@ -22,6 +23,6 @@ class RedditNewsResponse(
     @SerializedName("title") val title: String,
     @SerializedName("num_comments") val commentsNumber: Int,
     @SerializedName("created") val created: Long,
-    @SerializedName("thumbnail") val thumbnail: String,
+    @SerializedName("thumbnail") val thumbnail: ImageUrl,
     @SerializedName("url") val url: String
 )

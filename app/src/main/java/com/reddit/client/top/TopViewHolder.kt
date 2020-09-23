@@ -26,6 +26,10 @@ class TopViewHolder(view: View) : RecyclerView.ViewHolder(view) {
             item.onSaveImage()
         }
 
+        image.setOnClickListener {
+            item.onOpenImage()
+        }
+
         Picasso.get()
             .load(item.thumbnail)
             .into(image)

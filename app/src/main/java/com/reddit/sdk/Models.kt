@@ -13,9 +13,11 @@ data class RedditNews(
     val title: String,
     val created: Long,
     val commentsNumber: Int,
-    val thumbnail: String,
+    val thumbnail: ImageUrl,
     val url: String
 )
 
 val RedditNews.timeDelta
     get() = Calendar.getInstance().timeInMillis - created
+
+typealias ImageUrl = String
