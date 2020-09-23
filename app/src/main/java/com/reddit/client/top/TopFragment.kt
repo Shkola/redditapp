@@ -6,13 +6,14 @@ import android.net.Uri
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
+import androidx.core.view.isVisible
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
+import androidx.paging.LoadState
 import com.reddit.R
 import com.reddit.extension.observe
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.android.synthetic.main.fragment_main.*
-
 
 @AndroidEntryPoint
 class TopFragment : Fragment(R.layout.fragment_main) {
@@ -23,7 +24,33 @@ class TopFragment : Fragment(R.layout.fragment_main) {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
-        recyclerView.adapter = adapter
+        recyclerView.adapter = adapter.withLoadStateHeaderAndFooter(
+            header = TopLoadStateAdapter { adapter.retry() },
+            footer = TopLoadStateAdapter { adapter.retry() }
+        )
+        retryBtn.setOnClickListener { adapter.retry() }
+
+        swipeContainer.setOnRefreshListener {
+            adapter.refresh()
+        }
+
+        adapter.addLoadStateListener { loadState ->
+            recyclerView.isVisible = loadState.source.refresh !is LoadState.Error
+            swipeContainer.isRefreshing = loadState.source.refresh is LoadState.Loading
+            retryBtn.isVisible = loadState.source.refresh is LoadState.Error
+
+            val errorState = loadState.source.append as? LoadState.Error
+                ?: loadState.source.prepend as? LoadState.Error
+                ?: loadState.append as? LoadState.Error
+                ?: loadState.prepend as? LoadState.Error
+            errorState?.let {
+                Toast.makeText(
+                    activity,
+                    it.error.localizedMessage ?: it.error.message ?: it.error.toString(),
+                    Toast.LENGTH_LONG
+                ).show()
+            }
+        }
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
