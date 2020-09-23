@@ -25,8 +25,8 @@ import java.util.concurrent.TimeUnit
 
 
 class TopViewModel @ViewModelInject constructor(
-    @ApplicationContext private val context: Context,
-    moduleApi: ModuleApi
+        @ApplicationContext private val context: Context,
+        moduleApi: ModuleApi
 ) : BaseViewModel() {
 
     private val resources = context.resources
@@ -37,20 +37,23 @@ class TopViewModel @ViewModelInject constructor(
     private val _actionOpenImage = SingleLiveEvent<ImageUrl>()
     val actionOpenImage: LiveData<ImageUrl> = _actionOpenImage
 
+    private val _actionPermission = SingleLiveEvent<() -> Unit>()
+    val actionPermission: LiveData<() -> Unit> = _actionPermission
+
     val pagingTopListLiveData = moduleApi.getTop()
-        .map { dataSource ->
-            dataSource.map { item ->
-                val hoursDelta = TimeUnit.MILLISECONDS.toHours(item.timeDelta).toInt()
-                item.toTopRedditUi(
-                    description = resources.getQuantityString(R.plurals.descriptionPlaceholder, hoursDelta, item.author, hoursDelta),
-                    commentsCount = resources.getQuantityString(R.plurals.commentsPlaceholder, item.commentsNumber, item.commentsNumber),
-                    onSaveImage = { onSaveImageToGallery(item.thumbnail) },
-                    onOpenImage = { _actionOpenImage.value = item.thumbnail }
-                )
+            .map { dataSource ->
+                dataSource.map { item ->
+                    val hoursDelta = TimeUnit.MILLISECONDS.toHours(item.timeDelta).toInt()
+                    item.toTopRedditUi(
+                            description = resources.getQuantityString(R.plurals.descriptionPlaceholder, hoursDelta, item.author, hoursDelta),
+                            commentsCount = resources.getQuantityString(R.plurals.commentsPlaceholder, item.commentsNumber, item.commentsNumber),
+                            onSaveImage = { _actionPermission.value = { onSaveImageToGallery(item.thumbnail) } },
+                            onOpenImage = { _actionOpenImage.value = item.thumbnail }
+                    )
+                }
             }
-        }
-        .cachedIn(coroutineScope)
-        .asLiveData(coroutineScope.coroutineContext)
+            .cachedIn(coroutineScope)
+            .asLiveData(coroutineScope.coroutineContext)
 
     private fun onSaveImageToGallery(imageUrl: String) {
         // провтик пермішени чекнути WRITE_EXTERNAL_STORAGE.
@@ -70,7 +73,7 @@ class TopViewModel @ViewModelInject constructor(
         }.invokeOnCompletion { error ->
             if (error != null) {
                 _actionMessage.value = error.localizedMessage ?: error.message
-                    ?: resources.getString(R.string.file_not_saved)
+                        ?: resources.getString(R.string.file_not_saved)
             } else {
                 _actionMessage.value = resources.getString(R.string.image_saved)
             }

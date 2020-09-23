@@ -7,6 +7,7 @@
     <string name="file_not_saved">file not saved</string>
     <string name="unable_open">unable open file</string>
     <string name="retry">retry</string>
+    <string name="permission_denied">permission denied</string>
     <plurals name="descriptionPlaceholder">
         <item quantity="one">%s posted %d hour ago</item>
         <item quantity="other">%s posted %d hours ago</item>
